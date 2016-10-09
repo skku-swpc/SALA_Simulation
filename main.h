@@ -33,6 +33,8 @@ using namespace std;
 #define big(x,y) ((x<y)?(y):(x))
 #define sml(x,y) ((x<y)?(x):(y))
 
+#define VERSION "1.0.0"
+
 struct point{
 	double x, y, power, rad, ch;
 
@@ -88,6 +90,10 @@ bool is_clock (point x, point y, point z);
 bool in_map (double, double);
 bool in_range (double, double, point, point, point);
 void internal (point x, point y, int m, int n);
+
+// 추가 API 함수
+char *getSALAversion();
+int read_roomInfo(char *path);
 
 // 준비작업
 void reduce_multipath1(vector<point> * v, double size);

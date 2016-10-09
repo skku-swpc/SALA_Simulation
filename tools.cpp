@@ -67,4 +67,8 @@ void internal (point x, point y, int m, int n)
 	cy = (x.y*m + y.y*n) / (m+n);
 }
 
-
+// 버전 정보 얻기
+char *getSALAversion () 
+{
+	return VERSION;
+}

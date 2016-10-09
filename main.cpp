@@ -43,44 +43,12 @@ int main()
 	int algorithm = 0;
 	int start_idx, end_idx;
 
+	printf("SALA Simulation version : %s\n", getSALAversion());
+
 	for (int i = 1; i <= 30; ++i)
 		read_location(i);
 
-	FILE * fin = fopen("./data/room.txt", "rt");
-	int roomSize, roomSize2;
-	fscanf(fin, "%d", &roomSize);
-	roomSize2 = roomSize * 9;
-	for (int i = 0; i < roomSize; ++i)
-	{
-		fscanf(fin, "%lf %lf", &room[i][0].x, &room[i][0].y);
-		fscanf(fin, "%lf %lf", &room[i][1].x, &room[i][1].y);
-
-		point temp[2];
-		temp[0].x = room[i][1].x;
-		temp[0].y = room[i][0].y;
-		temp[1].x = room[i][0].x;
-		temp[1].y = room[i][1].y;
-
-		room2[i * 9 + 0][0] = room[i][0];
-		room2[i * 9 + 0][1] = room[i][0] + point(MARGIN, MARGIN);
-		room2[i * 9 + 1][0] = room[i][0] + point(MARGIN, 0);
-		room2[i * 9 + 1][1] = temp[0] + point(-MARGIN, -MARGIN);
-		room2[i * 9 + 2][0] = temp[0] + point(-MARGIN, 0);
-		room2[i * 9 + 2][1] = temp[0] + point(0, MARGIN);
-		room2[i * 9 + 3][0] = room[i][0] + point(0, MARGIN);
-		room2[i * 9 + 3][1] = temp[1] + point(MARGIN, -MARGIN);
-		room2[i * 9 + 4][0] = temp[1] + point(0, -MARGIN);
-		room2[i * 9 + 4][1] = temp[1] + point(MARGIN, 0);
-		room2[i * 9 + 5][0] = temp[1] + point(MARGIN, -MARGIN);
-		room2[i * 9 + 5][1] = room[i][1] + point(-MARGIN, 0);
-		room2[i * 9 + 6][0] = room[i][1] + point(-MARGIN, -MARGIN);
-		room2[i * 9 + 6][1] = room[i][1];
-		room2[i * 9 + 7][0] = temp[0] + point(-MARGIN, MARGIN);
-		room2[i * 9 + 7][1] = room[i][1] + point(0, -MARGIN);
-		room2[i * 9 + 8][0] = room[i][0] + point(MARGIN, MARGIN);
-		room2[i * 9 + 8][1] = room[i][1] + point(-MARGIN, -MARGIN);
-	}
-	fclose(fin);
+	read_roomInfo("./data/room.txt");
 
 	for (algorithm = 3; algorithm <= 3; ++algorithm)
 	{
@@ -117,7 +85,7 @@ int main()
 					}
 
 					//	divide(mat, part); // 파워 계층 나누기
-					//	convex_func(mat, part, res);
+					// convex_func(mat, part, res);
 				}
 				else if (algorithm == 2){
 					average2(mat, res);
@@ -139,46 +107,46 @@ int main()
 
 					/*for (int k = 2; k < n; k++) if (judge(res, k) != CENTER && mat[k].size() < 50)
 					{
-						if (abs(res[k].x) <= MARGIN)
-						{
-							int A = mat[k].size();
-							for (int i = 0; i < A; i++)
-							{
-								point t = mat[k][i];
-								t.x = -t.x;
-								mat[k].push_back(t);
-							}
-						}
-						if (abs(res[k].x - MAP_X) <= MARGIN)
-						{
-							int A = mat[k].size();
-							for (int i = 0; i < A; i++)
-							{
-								point t = mat[k][i];
-								t.x = 2 * MAP_X - mat[k][i].x;
-								mat[k].push_back(t);
-							}
-						}
-						if (abs(res[k].y) <= MARGIN)
-						{
-							int A = mat[k].size();
-							for (int i = 0; i < A; i++)
-							{
-								point t = mat[k][i];
-								t.y = -t.y;
-								mat[k].push_back(t);
-							}
-						}
-						if (abs(res[k].y - MAP_Y) <= MARGIN)
-						{
-							int A = mat[k].size();
-							for (int i = 0; i < A; i++)
-							{
-								point t = mat[k][i];
-								t.y = 2 * MAP_Y - mat[k][i].y;
-								mat[k].push_back(t);
-							}
-						}
+					if (abs(res[k].x) <= MARGIN)
+					{
+					int A = mat[k].size();
+					for (int i = 0; i < A; i++)
+					{
+					point t = mat[k][i];
+					t.x = -t.x;
+					mat[k].push_back(t);
+					}
+					}
+					if (abs(res[k].x - MAP_X) <= MARGIN)
+					{
+					int A = mat[k].size();
+					for (int i = 0; i < A; i++)
+					{
+					point t = mat[k][i];
+					t.x = 2 * MAP_X - mat[k][i].x;
+					mat[k].push_back(t);
+					}
+					}
+					if (abs(res[k].y) <= MARGIN)
+					{
+					int A = mat[k].size();
+					for (int i = 0; i < A; i++)
+					{
+					point t = mat[k][i];
+					t.y = -t.y;
+					mat[k].push_back(t);
+					}
+					}
+					if (abs(res[k].y - MAP_Y) <= MARGIN)
+					{
+					int A = mat[k].size();
+					for (int i = 0; i < A; i++)
+					{
+					point t = mat[k][i];
+					t.y = 2 * MAP_Y - mat[k][i].y;
+					mat[k].push_back(t);
+					}
+					}
 					}*/
 
 

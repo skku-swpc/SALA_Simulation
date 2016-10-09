@@ -12,6 +12,55 @@ extern vector<point> mat[N];
 extern int case_idx, iaNum;
 extern char case_char[9], info[2][50];
 
+extern point room[10][2], room2[10][2];
+
+// 방 정보 불러오기
+int read_roomInfo(char *path) {
+
+	FILE * fin = fopen(path, "rt");
+
+	if (fin == NULL) {
+		return -1;
+	}
+
+	int roomSize, roomSize2;
+	fscanf(fin, "%d", &roomSize);
+	roomSize2 = roomSize * 9;
+	for (int i = 0; i < roomSize; ++i)
+	{
+		fscanf(fin, "%lf %lf", &room[i][0].x, &room[i][0].y);
+		fscanf(fin, "%lf %lf", &room[i][1].x, &room[i][1].y);
+
+		point temp[2];
+		temp[0].x = room[i][1].x;
+		temp[0].y = room[i][0].y;
+		temp[1].x = room[i][0].x;
+		temp[1].y = room[i][1].y;
+
+		room2[i * 9 + 0][0] = room[i][0];
+		room2[i * 9 + 0][1] = room[i][0] + point(MARGIN, MARGIN);
+		room2[i * 9 + 1][0] = room[i][0] + point(MARGIN, 0);
+		room2[i * 9 + 1][1] = temp[0] + point(-MARGIN, -MARGIN);
+		room2[i * 9 + 2][0] = temp[0] + point(-MARGIN, 0);
+		room2[i * 9 + 2][1] = temp[0] + point(0, MARGIN);
+		room2[i * 9 + 3][0] = room[i][0] + point(0, MARGIN);
+		room2[i * 9 + 3][1] = temp[1] + point(MARGIN, -MARGIN);
+		room2[i * 9 + 4][0] = temp[1] + point(0, -MARGIN);
+		room2[i * 9 + 4][1] = temp[1] + point(MARGIN, 0);
+		room2[i * 9 + 5][0] = temp[1] + point(MARGIN, -MARGIN);
+		room2[i * 9 + 5][1] = room[i][1] + point(-MARGIN, 0);
+		room2[i * 9 + 6][0] = room[i][1] + point(-MARGIN, -MARGIN);
+		room2[i * 9 + 6][1] = room[i][1];
+		room2[i * 9 + 7][0] = temp[0] + point(-MARGIN, MARGIN);
+		room2[i * 9 + 7][1] = room[i][1] + point(0, -MARGIN);
+		room2[i * 9 + 8][0] = room[i][0] + point(MARGIN, MARGIN);
+		room2[i * 9 + 8][1] = room[i][1] + point(-MARGIN, -MARGIN);
+	}
+	fclose(fin);
+
+	return 0;
+}
+
 // IA들의 위치 저장
 void read_location(int index)
 {
